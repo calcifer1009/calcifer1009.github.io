@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="NO-CACHE">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="./script.js"></script>
+
+    <title>SmartCarzua Simple Server</title>
+
+    <style>
+        .jumbotron {
+            background-color: #f4511e; /* Orange */
+            color: #ffffff;
+            margin-bottom: 0px;
+        }
+        .connectInfo {
+            margin-top: 0px;
+            padding: 1%;
+            text-align: center;
+            color: white;
+            background-color: dimgrey;
+        }
+        .graphSide{
+            margin-top: 1%;
+            margin-left: 1%;
+            margin-right: 1%;
+        }
+        .well-lg {
+            background-color: transparent;
+        }
+        .well-sm{
+            text-align: center;
+            color: darkslategray;
+            font-weight: bold;
+        }
+        #tables {display: table; width: 100%;}
+        .row {display: table-row;}
+        .cell {display: table-cell;}
+    </style>
+
+</head>
+
+<body>
+
+<div>
+    <div class="jumbotron text-center">
+        <h1>Smart Carzua</h1>
+        <p>BlockChain 접속 현황</p>
+        <form class="form-inline">
+            <div class="input-group">
+                <input type="email" id="memberIDInput" class="form-control" size="50" placeholder=" Account Info" required>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-danger" onclick="GetMemberInfo()">차량 검색</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="connectInfo">
+    컨트랙트 주소 : <span id="contractAddr"></span>
+    접속노드 주소 : <span id="accountAddr"></span>
+</div>
+
+<div class="graphSide">
+    <div class="col-md-4">
+        <div class="well well-lg">
+            <div class="well well-sm">최근 Block 생성 정보</div>
+            <div >마지막 생성 블록 : <span id="lastBlock"></span></div>
+        </div>
+        <div class="well well-lg">
+            <div class="well well-sm">BlockChain 접속 통계</div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>info</th>
+                    <th>count</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>전체 회원수</td>
+                    <td><div id="totalMember"></div></td>
+                </tr>
+                <tr>
+                    <td>총 Transaction 수</td>
+                    <td><div id="totalTransaction"></div></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="well well-lg">
+            <div class="well well-sm">차량 주행 통계</div>
+            <div id="chart_car_kind"></div>
+            <div id="chart_car_driving"></div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="well well-lg">
+            <div class="well well-sm">선택 차량 정보</div>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>차량 소유주</td>
+                    <td><div id="carOwner"></div></td>
+                </tr>
+                <tr>
+                    <td>차량 정보</td>
+                    <td><div id="carInfo"></div></td>
+                </tr>
+                <tr>
+                    <td>총 주행 거리</td>
+                    <td><div id="carTotalDriving"> KM</div></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="well well-lg">
+            <div class="well well-sm">주행 정보 갱신</div>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td><input type="email" id="carOwner_Change" class="form-control" size="50" placeholder=" Account Info" required></input></td>
+                </tr>
+                <tr>
+                    <td><input type="number" id="additionalDriving_Change" class="form-control" size="50" placeholder=" 추가 주행 거리" required></input></td>
+                </tr>
+                </tbody>
+            </table>
+            <div align="center"><button type="button" class="btn btn-danger" onclick="SetMemberInfo()">정보 갱신</button></div>
+            <div id="updateInfo"></div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
